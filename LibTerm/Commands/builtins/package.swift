@@ -18,7 +18,7 @@ fileprivate let underline = "\u{001b}[4m"
 
 fileprivate let packagesKey = ObjectUserDefaults.standard.item(forKey: "packages")
 
-fileprivate let scriptsURL = FileManager.default.urls(for: .libraryDirectory, in: .allDomainsMask)[0].appendingPathComponent("scripts")
+fileprivate let scriptsURL = FileManager.default.urls(for: .libraryDirectory, in: .allDomainsMask)[0].appendingPathComponent("bin")
 
 /// The `package` command.
 func packageMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
@@ -76,7 +76,7 @@ func packageMain(argc: Int, argv: [String], io: LTIO) -> Int32 {
                 }
                 
                 // A temporary directory is created where the package will be installed. After the package is installed in this temporary directory, the command will index all files inside it to remove them with `package remove`. All files are then moved to the permanent directory where all other packages are installed.
-                let tmpURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("scripts")
+                let tmpURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("bin")
                 if !FileManager.default.fileExists(atPath: tmpURL.path) {
                     do {
                         try FileManager.default.createDirectory(at: tmpURL, withIntermediateDirectories: false, attributes: nil)
